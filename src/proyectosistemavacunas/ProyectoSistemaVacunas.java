@@ -24,12 +24,12 @@ public class ProyectoSistemaVacunas {
         
         // creando una list simple de vacunas
         ListaSimple<Vacuna> listaDeVacunas = new ListaSimple();
-        listaDeVacunas.addToFront(pfizer);
+        listaDeVacunas.push(pfizer);
         listaDeVacunas.printList();
-        listaDeVacunas.addToFront(astraZeneca);
+        listaDeVacunas.push(astraZeneca);
         listaDeVacunas.printList();
         
-        System.out.println("Remover: " + listaDeVacunas.removeFromFront());
+        System.out.println("Remover: " + listaDeVacunas.pop());
         listaDeVacunas.printList();
         
         System.out.println("Esta la lista vacia: " + listaDeVacunas.isEmpty());

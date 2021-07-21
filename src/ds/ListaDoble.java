@@ -11,8 +11,8 @@ package ds;
  */
 public class ListaDoble<T> {
 
-    private Nodo cabeza;
-    private Nodo cola;
+    private Node head;
+    private Node tail;
     private int size;
 
     public ListaDoble() {
@@ -28,80 +28,77 @@ public class ListaDoble<T> {
     }
 
     public boolean isEmpty() {
-        return cabeza == null;
+        return head == null;
     }
 
     public void addToFront(T data) {
-        Nodo<T> nodo = new Nodo(data);
-        nodo.setSiguiente(cabeza);
-        if (cabeza == null) {
-            cola = nodo;
+        Node<T> newNode = new Node(data);
+        newNode.setNext(head);
+        if (head == null) {
+            tail = newNode;
         } else {
-            cabeza.setAnterior(nodo);
+            head.setPrevious(newNode);
         }
-        cabeza = nodo;
+        head = newNode;
         size++;
 
     }
 
     public void addToEnd(T data) {
-        Nodo<T> nodo = new Nodo(data);
-        if (cola == null) {
-            cabeza = nodo;
+        Node<T> newNode = new Node(data);
+        if (tail == null) {
+            head = newNode;
         } else {
-            cola.setSiguiente(nodo);
-            nodo.setAnterior(cola);
+            tail.setNext(newNode);
+            newNode.setPrevious(tail);
         }
-        cola = nodo;
+        tail = newNode;
         size++;
     }
 
-    public Nodo removeFromFront() {
+    public Node removeFromFront() {
         if (isEmpty()) {
             return null;
         }
 
-        Nodo removedNode = cabeza;
+        Node removedNode = head;
 
-        if (cabeza.getSiguiente() == null) {
-            cola = null;
+        if (head.getNext() == null) {
+            tail = null;
         } else {
-            cabeza.getSiguiente().setAnterior(null);
+            head.getNext().setPrevious(null);
         }
 
-        cabeza = cabeza.getSiguiente();
-        removedNode.setSiguiente(null);
+        head = head.getNext();
+        removedNode.setNext(null);
         size--;
         return removedNode;
     }
 
-    public Nodo removerUltimo() {
+    public Node removeFromEnd() {
         if (isEmpty()) {
             return null;
         }
 
-        Nodo removedNode = cola;
-        if (cola.getAnterior() == null) {
-            cabeza = null;
+        Node removedNode = tail;
+        if (tail.getPrevious() == null) {
+            head = null;
         } else {
-            cola.getAnterior().setSiguiente(null);
+            tail.getPrevious().setNext(null);
         }
 
-        cola = cola.getAnterior();
-        removedNode.setAnterior(null);
+        tail = tail.getPrevious();
+        removedNode.setPrevious(null);
         size--;
         return removedNode;
-    }
-
-    public void addBefore(Nodo nuevoNodo, Nodo nodoDestino) {
     }
 
     public void printList() {
-        Nodo current = cabeza;
+        Node current = head;
         System.out.print("HEAD -> ");
         while (current != null) {
             System.out.print(current);
-            current = current.getSiguiente();
+            current = current.getNext();
             if (current != null) {
                 System.out.print(" <=> ");
             }
