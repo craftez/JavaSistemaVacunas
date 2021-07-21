@@ -46,8 +46,8 @@ public class Paciente {
         this.grupo_riesgo = grupo_riesgo;
     }
 
-    public void getId() {
-        this.id = id;
+    public String getId() {
+        return id;
     }
 
     public void setId(String id) {
@@ -58,7 +58,8 @@ public class Paciente {
     public String toString() {
         return "Paciente{" + "name=" + name + ", status=" + status + ", grupo_riesgo=" + grupo_riesgo + ", id=" + id + '}';
     }
-  
+
+   
   
   
 }
