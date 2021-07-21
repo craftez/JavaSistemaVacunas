@@ -10,7 +10,7 @@ package ds;
  * @author ez
  */
 public class ListaSimple<T> {
-    private Nodo head;
+    private Nodo cabeza;
     private int size;
     
     public ListaSimple() {
@@ -22,27 +22,39 @@ public class ListaSimple<T> {
     }
     
     public boolean isEmpty() {
-        return head == null;
+        return cabeza == null;
+    }
+
+    public Nodo getCabeza() {
+        return cabeza;
     }
     
     public void addToFront(T data) {
         Nodo<T> node = new Nodo(data);
-        node.setSiguiente(head);
-        head = node;
+        node.setSiguiente(cabeza);
+        cabeza = node;
         size++;
     }
     
     public Nodo removeFromFront() {
         if (isEmpty()) return null;
-        Nodo removedNode = head;
-        head = head.getSiguiente();
+        Nodo removedNode = cabeza;
+        cabeza = cabeza.getSiguiente();
         removedNode.setSiguiente(null);
         size--;
         return removedNode;
     }
     
+    public void clear() {
+        Nodo current = cabeza;
+        while (current != null) {
+            cabeza = current.getSiguiente();
+        }
+        cabeza = null;
+    }
+    
     public void printList() {
-        Nodo current = head;
+        Nodo current = cabeza;
         System.out.print("HEAD -> ");
         while(current != null) {
             System.out.print(current);
