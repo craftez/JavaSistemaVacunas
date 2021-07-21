@@ -7,6 +7,7 @@ package proyectosistemavacunas;
 
 import ds.ListaSimple;
 import models.Vacuna;
+import ui.Principal;
 
 /**
  *
@@ -17,7 +18,8 @@ public class ProyectoSistemaVacunas {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {    
+        new Principal();
         // Creando vacunas
         Vacuna pfizer = new Vacuna("Pfizer");
         Vacuna astraZeneca = new Vacuna("AstraZeneca");
