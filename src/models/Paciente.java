@@ -13,7 +13,7 @@ public class Paciente {
   private String name;
   private String status;
   private String grupo_riesgo;
-  private int id;
+  private String id;
   
   public Paciente() {
   }
@@ -46,12 +46,17 @@ public class Paciente {
         this.grupo_riesgo = grupo_riesgo;
     }
 
-    public int getId() {
-        return id;
+    public void getId() {
+        this.id = id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Paciente{" + "name=" + name + ", status=" + status + ", grupo_riesgo=" + grupo_riesgo + ", id=" + id + '}';
     }
   
   
