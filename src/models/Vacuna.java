@@ -10,36 +10,65 @@ package models;
  * @author ez
  */
 public class Vacuna {
-    private String brand;
-    private String commercialName;
+    private String farmaceutica;
+    private String nombre;
+    private int dosisRequeridas;
+    private int minDiasEntreDosis;
+    private int maxDiasEntreDosis;
+    private String estado;
 
-    public Vacuna() {
+    public String getFarmaceutica() {
+        return farmaceutica;
     }
 
-    public Vacuna(String brand) {
-        this.brand = brand;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getBrand() {
-        return brand;
+    public int getDosisRequeridas() {
+        return dosisRequeridas;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public int getMinDiasEntreDosis() {
+        return minDiasEntreDosis;
     }
 
-    public String getCommercialName() {
-        return commercialName;
+    public int getMaxDiasEntreDosis() {
+        return maxDiasEntreDosis;
     }
 
-    public void setCommercialName(String commercialName) {
-        this.commercialName = commercialName;
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setFarmaceutica(String farmaceutica) {
+        this.farmaceutica = farmaceutica;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDosisRequeridas(int dosisRequeridas) {
+        this.dosisRequeridas = dosisRequeridas;
+    }
+
+    public void setMinDiasEntreDosis(int minDiasEntreDosis) {
+        this.minDiasEntreDosis = minDiasEntreDosis;
+    }
+
+    public void setMaxDiasEntreDosis(int maxDiasEntreDosis) {
+        this.maxDiasEntreDosis = maxDiasEntreDosis;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override
     public String toString() {
-        return "Vacuna{" + "brand=" + brand + ", commercialName=" + commercialName + '}';
+        return "Vacuna{" + "farmaceutica=" + farmaceutica + ", nombre=" + nombre + ", dosisRequeridas=" + dosisRequeridas + ", minDiasEntreDosis=" + minDiasEntreDosis + ", maxDiasEntreDosis=" + maxDiasEntreDosis + ", estado=" + estado + '}';
     }
-    
-    
+
+     
 }

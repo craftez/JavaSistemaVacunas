@@ -10,56 +10,56 @@ package models;
  * @author ez
  */
 public class Paciente {
-  private String name;
-  private String status;
-  private String grupo_riesgo;
-  private String id;
-  
-  public Paciente() {
-  }
-  
-  public Paciente(String name) {
-      this.name = name;
-  }
-  
-  public String getName() {
-      return name;
-  }
-  
-  public void setName(String name) {
-      this.name = name;
-  }
+  private String cedula;
+  private String nombreCompleto;
+  private GrupoDeRiesgo grupoDeRiesgo;
+  private LibroDeVacunas vacunas;
+  private String telefono;
 
-    public String getStatus() {
-        return status;
+    public String getCedula() {
+        return cedula;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public String getGrupo_riesgo() {
-        return grupo_riesgo;
+    public GrupoDeRiesgo getGrupoDeRiesgo() {
+        return grupoDeRiesgo;
     }
 
-    public void setGrupo_riesgo(String grupo_riesgo) {
-        this.grupo_riesgo = grupo_riesgo;
+    public LibroDeVacunas getVacunas() {
+        return vacunas;
     }
 
-    public String getId() {
-        return id;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public void setGrupoDeRiesgo(GrupoDeRiesgo grupoDeRiesgo) {
+        this.grupoDeRiesgo = grupoDeRiesgo;
+    }
+
+    public void setVacunas(LibroDeVacunas vacunas) {
+        this.vacunas = vacunas;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     @Override
     public String toString() {
-        return "Paciente{" + "name=" + name + ", status=" + status + ", grupo_riesgo=" + grupo_riesgo + ", id=" + id + '}';
+        return "Paciente{" + "cedula=" + cedula + ", nombreCompleto=" + nombreCompleto + ", grupoDeRiesgo=" + grupoDeRiesgo + ", vacunas=" + vacunas + ", telefono=" + telefono + '}';
     }
-
-   
   
   
 }
