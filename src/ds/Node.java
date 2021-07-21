@@ -9,15 +9,15 @@ package ds;
  *
  * @author ez
  */
-public class Nodo<T> {
+public class Node<T> {
     private T data;
-    private Nodo siguiente;
-    private Nodo anterior;
+    private Node next;
+    private Node previous;
 
-    public Nodo() {
+    public Node() {
     }
 
-    public Nodo(T data) {
+    public Node(T data) {
         this.data = data;
     }
 
@@ -29,20 +29,20 @@ public class Nodo<T> {
         this.data = data;
     }
 
-    public Nodo getSiguiente() {
-        return siguiente;
+    public Node getNext() {
+        return next;
     }
 
-    public void setSiguiente(Nodo siguiente) {
-        this.siguiente = siguiente;
+    public void setNext(Node next) {
+        this.next = next;
     }
 
-    public Nodo getAnterior() {
-        return anterior;
+    public Node getPrevious() {
+        return previous;
     }
 
-    public void setAnterior(Nodo anterior) {
-        this.anterior = anterior;
+    public void setPrevious(Node previous) {
+        this.previous = previous;
     }
     
     @Override

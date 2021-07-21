@@ -23,15 +23,15 @@ public class Pila<T> {
     }
     
     public void push(T data) {
-        stack.addToFront(data);
+        stack.push(data);
     }
     
     public T pop() {
-        return (T) stack.removeFromFront().getData();
+        return (T) stack.pop().getData();
     }
     
     public T peek() {
-        return (T) stack.getCabeza().getData();
+        return (T) stack.getHead().getData();
     }
     
     public boolean isEmpty() {
