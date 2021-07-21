@@ -10,5 +10,6 @@ package models;
  * @author ez
  */
 public class Paciente {
-    
+  private String nombre;
+  
 }
