@@ -5,20 +5,62 @@
  */
 package ui;
 
+import ds.Cola;
+import ds.ListaSimple;
+import ds.Pila;
+import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import models.Cita;
+import models.GrupoDeRiesgo;
+import models.Paciente;
+import models.Vacuna;
+import tableModels.CitasTableModel;
+import tableModels.GruposDeRiesgoTableModel;
+import tableModels.PacientesTableModel;
+import tableModels.VacunasTableModel;
+
 /**
  *
  * @author ez
  */
 public class Principal extends javax.swing.JFrame {
+    private CardLayout cardLayout;
+    private static Cola<Cita> colaDeCitas;
+    private static Pila<GrupoDeRiesgo> pilaDeGruposDeRiesgo;
+    private static ListaSimple<Vacuna> listaSimpleDeVacunas;
+    private static ListaSimple<Paciente> listaSimpleDePacientes;
+    private static ListaSimple<Paciente> listaSimpleDePacientesVacunados;
+    
+    private VacunasTableModel vacunaTableModel;
+    private CitasTableModel citasTableModel;
+    private GruposDeRiesgoTableModel gruposDeRiesgoTableModel;
+    private PacientesTableModel pacientesTableModel;
 
     /**
      * Creates new form Main
      */
     public Principal() {
         initComponents();
+        setSize(656,482);
         setTitle("Sistema De Vacunas");
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        cardLayout = (CardLayout) pnlCards.getLayout();
+        
+        initDataStructures();
+        
+        ((JSpinner.DefaultEditor) inpDosis.getEditor()).getTextField().setEditable(false);
+    }
+    
+    private void initDataStructures() {
+        colaDeCitas = new Cola();
+        pilaDeGruposDeRiesgo = new Pila();
+        listaSimpleDeVacunas = new ListaSimple();
+        listaSimpleDePacientes = new ListaSimple();
+        listaSimpleDePacientesVacunados = new ListaSimple();
     }
 
     /**
@@ -30,69 +72,909 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        SidePane = new javax.swing.JPanel();
+        btn_inicio = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        grupoMenuPacientes = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btn_pacientes = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        grupoMenuCitas = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btn_citas = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        grupoMenuConfiguracion = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        btn_vacunas = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        btn_grupos_de_riesgo = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        btn_salir = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        TitleBar = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        lblMainTitle = new javax.swing.JLabel();
+        pnlCards = new javax.swing.JPanel();
+        cardInicio = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        cardPacientes = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblPacientes = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        inpNombreVacuna2 = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        inpFarmaceutica2 = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        inpDosis2 = new javax.swing.JSpinner();
+        btnAgregarVacuna2 = new javax.swing.JButton();
+        cardCitas = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblCitas = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        inpNombreVacuna1 = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        inpFarmaceutica1 = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        inpDosis1 = new javax.swing.JSpinner();
+        btnAgregarVacuna1 = new javax.swing.JButton();
+        cardVacunas = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblVacunas = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        inpNombreVacuna = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        inpFarmaceutica = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        inpDosis = new javax.swing.JSpinner();
+        btnAgregarVacuna = new javax.swing.JButton();
+        cardGruposDeRiesgo = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblGruposDeRiesgo = new javax.swing.JTable();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        inpGrpRiesgoNombre = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        inpGrpRiesgoDescripcion = new javax.swing.JTextArea();
+        jLabel33 = new javax.swing.JLabel();
+        inpGrpRiesgoEdadMin = new javax.swing.JSpinner();
+        jLabel34 = new javax.swing.JLabel();
+        inpGrpRiesgoEdadMax = new javax.swing.JSpinner();
+        jLabel35 = new javax.swing.JLabel();
+        inpGrpRiesgoEstado = new javax.swing.JComboBox<>();
+        btnAgregarGrupoDeRiesgo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1280, 720));
 
-        jLabel1.setText("En construcción");
+        SidePane.setBackground(new java.awt.Color(106, 90, 205));
+        SidePane.setPreferredSize(new java.awt.Dimension(300, 0));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(250, 250, 250)
-                .addComponent(jLabel1)
-                .addContainerGap(266, Short.MAX_VALUE))
+        btn_inicio.setBackground(new java.awt.Color(72, 61, 139));
+        btn_inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_inicio.setPreferredSize(new java.awt.Dimension(250, 40));
+        btn_inicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_inicioMousePressed(evt);
+            }
+        });
+        btn_inicio.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 10, 0));
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Inicio");
+        jLabel4.setPreferredSize(new java.awt.Dimension(230, 40));
+        btn_inicio.add(jLabel4);
+
+        SidePane.add(btn_inicio);
+
+        grupoMenuPacientes.setBackground(new java.awt.Color(106, 90, 205));
+        grupoMenuPacientes.setMinimumSize(new java.awt.Dimension(170, 39));
+        grupoMenuPacientes.setPreferredSize(new java.awt.Dimension(250, 100));
+
+        jLabel1.setForeground(new java.awt.Color(230, 230, 250));
+        jLabel1.setText("Pascientes");
+        jLabel1.setPreferredSize(new java.awt.Dimension(250, 20));
+        grupoMenuPacientes.add(jLabel1);
+        jLabel1.getAccessibleContext().setAccessibleName("");
+
+        btn_pacientes.setBackground(new java.awt.Color(123, 104, 238));
+        btn_pacientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_pacientes.setPreferredSize(new java.awt.Dimension(250, 40));
+        btn_pacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_pacientesMousePressed(evt);
+            }
+        });
+        btn_pacientes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 10, 0));
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Pacientes");
+        jLabel7.setPreferredSize(new java.awt.Dimension(230, 40));
+        btn_pacientes.add(jLabel7);
+
+        grupoMenuPacientes.add(btn_pacientes);
+        btn_pacientes.getAccessibleContext().setAccessibleName("");
+
+        SidePane.add(grupoMenuPacientes);
+
+        grupoMenuCitas.setBackground(new java.awt.Color(106, 90, 205));
+        grupoMenuCitas.setMinimumSize(new java.awt.Dimension(170, 39));
+        grupoMenuCitas.setPreferredSize(new java.awt.Dimension(250, 100));
+
+        jLabel2.setForeground(new java.awt.Color(230, 230, 250));
+        jLabel2.setText("Citas");
+        jLabel2.setPreferredSize(new java.awt.Dimension(250, 20));
+        grupoMenuCitas.add(jLabel2);
+
+        btn_citas.setBackground(new java.awt.Color(123, 104, 238));
+        btn_citas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_citas.setPreferredSize(new java.awt.Dimension(250, 40));
+        btn_citas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_citasMousePressed(evt);
+            }
+        });
+        btn_citas.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 10, 0));
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Citas");
+        jLabel9.setPreferredSize(new java.awt.Dimension(230, 40));
+        btn_citas.add(jLabel9);
+
+        grupoMenuCitas.add(btn_citas);
+
+        SidePane.add(grupoMenuCitas);
+
+        grupoMenuConfiguracion.setBackground(new java.awt.Color(106, 90, 205));
+        grupoMenuConfiguracion.setMinimumSize(new java.awt.Dimension(170, 39));
+        grupoMenuConfiguracion.setPreferredSize(new java.awt.Dimension(250, 120));
+
+        jLabel3.setForeground(new java.awt.Color(230, 230, 250));
+        jLabel3.setText("Configuración");
+        jLabel3.setPreferredSize(new java.awt.Dimension(250, 20));
+        grupoMenuConfiguracion.add(jLabel3);
+
+        btn_vacunas.setBackground(new java.awt.Color(123, 104, 238));
+        btn_vacunas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_vacunas.setPreferredSize(new java.awt.Dimension(250, 40));
+        btn_vacunas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_vacunasMousePressed(evt);
+            }
+        });
+        btn_vacunas.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 10, 0));
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Vacunas");
+        jLabel11.setPreferredSize(new java.awt.Dimension(230, 40));
+        btn_vacunas.add(jLabel11);
+
+        grupoMenuConfiguracion.add(btn_vacunas);
+
+        btn_grupos_de_riesgo.setBackground(new java.awt.Color(123, 104, 238));
+        btn_grupos_de_riesgo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_grupos_de_riesgo.setPreferredSize(new java.awt.Dimension(250, 40));
+        btn_grupos_de_riesgo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_grupos_de_riesgoMousePressed(evt);
+            }
+        });
+        btn_grupos_de_riesgo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 10, 0));
+
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Grupos de Riesgo");
+        jLabel10.setPreferredSize(new java.awt.Dimension(230, 40));
+        btn_grupos_de_riesgo.add(jLabel10);
+
+        grupoMenuConfiguracion.add(btn_grupos_de_riesgo);
+
+        SidePane.add(grupoMenuConfiguracion);
+
+        jSeparator2.setPreferredSize(new java.awt.Dimension(240, 10));
+        SidePane.add(jSeparator2);
+
+        btn_salir.setBackground(new java.awt.Color(255, 255, 255));
+        btn_salir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_salir.setPreferredSize(new java.awt.Dimension(250, 40));
+        btn_salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_salirMousePressed(evt);
+            }
+        });
+        btn_salir.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 10, 0));
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(72, 61, 139));
+        jLabel5.setText("Salir");
+        jLabel5.setPreferredSize(new java.awt.Dimension(230, 40));
+        btn_salir.add(jLabel5);
+
+        SidePane.add(btn_salir);
+
+        getContentPane().add(SidePane, java.awt.BorderLayout.WEST);
+
+        TitleBar.setBackground(new java.awt.Color(72, 61, 139));
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(316, 100));
+
+        lblMainTitle.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        lblMainTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblMainTitle.setText("Inicio");
+        lblMainTitle.setPreferredSize(new java.awt.Dimension(230, 40));
+
+        javax.swing.GroupLayout TitleBarLayout = new javax.swing.GroupLayout(TitleBar);
+        TitleBar.setLayout(TitleBarLayout);
+        TitleBarLayout.setHorizontalGroup(
+            TitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitleBarLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblMainTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(781, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(216, 216, 216)
-                .addComponent(jLabel1)
-                .addContainerGap(240, Short.MAX_VALUE))
+        TitleBarLayout.setVerticalGroup(
+            TitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitleBarLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(TitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TitleBarLayout.createSequentialGroup()
+                        .addComponent(lblMainTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
+
+        getContentPane().add(TitleBar, java.awt.BorderLayout.NORTH);
+
+        pnlCards.setBackground(new java.awt.Color(186, 228, 248));
+        pnlCards.setPreferredSize(new java.awt.Dimension(980, 914));
+        pnlCards.setLayout(new java.awt.CardLayout());
+
+        jLabel18.setText("Inicio");
+
+        javax.swing.GroupLayout cardInicioLayout = new javax.swing.GroupLayout(cardInicio);
+        cardInicio.setLayout(cardInicioLayout);
+        cardInicioLayout.setHorizontalGroup(
+            cardInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardInicioLayout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(jLabel18)
+                .addContainerGap(693, Short.MAX_VALUE))
+        );
+        cardInicioLayout.setVerticalGroup(
+            cardInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardInicioLayout.createSequentialGroup()
+                .addGap(373, 373, 373)
+                .addComponent(jLabel18)
+                .addContainerGap(525, Short.MAX_VALUE))
+        );
+
+        pnlCards.add(cardInicio, "cardInicio");
+
+        tblPacientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tblPacientes);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel26.setText("Nueva Cita");
+
+        jLabel27.setText("Nombre:");
+        jLabel27.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel27);
+
+        inpNombreVacuna2.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpNombreVacuna2);
+
+        jLabel28.setText("Farmaceutica");
+        jLabel28.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel28);
+
+        inpFarmaceutica2.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpFarmaceutica2);
+
+        jLabel29.setText("Número Dosis");
+        jLabel29.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel29);
+
+        inpDosis2.setEditor(new javax.swing.JSpinner.NumberEditor(inpDosis2, ""));
+        inpDosis2.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpDosis2);
+
+        btnAgregarVacuna2.setText("Agregar Vacuna");
+        btnAgregarVacuna2.setPreferredSize(new java.awt.Dimension(220, 40));
+        btnAgregarVacuna2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAgregarVacuna2MousePressed(evt);
+            }
+        });
+        jPanel7.add(btnAgregarVacuna2);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(0, 279, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout cardPacientesLayout = new javax.swing.GroupLayout(cardPacientes);
+        cardPacientes.setLayout(cardPacientesLayout);
+        cardPacientesLayout.setHorizontalGroup(
+            cardPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardPacientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        cardPacientesLayout.setVerticalGroup(
+            cardPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardPacientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cardPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlCards.add(cardPacientes, "cardPacientes");
+
+        tblCitas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblCitas);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel22.setText("Nueva Cita");
+
+        jLabel23.setText("Nombre:");
+        jLabel23.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel5.add(jLabel23);
+
+        inpNombreVacuna1.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel5.add(inpNombreVacuna1);
+
+        jLabel24.setText("Farmaceutica");
+        jLabel24.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel5.add(jLabel24);
+
+        inpFarmaceutica1.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel5.add(inpFarmaceutica1);
+
+        jLabel25.setText("Número Dosis");
+        jLabel25.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel5.add(jLabel25);
+
+        inpDosis1.setEditor(new javax.swing.JSpinner.NumberEditor(inpDosis1, ""));
+        inpDosis1.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel5.add(inpDosis1);
+
+        btnAgregarVacuna1.setText("Agregar Vacuna");
+        btnAgregarVacuna1.setPreferredSize(new java.awt.Dimension(220, 40));
+        btnAgregarVacuna1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAgregarVacuna1MousePressed(evt);
+            }
+        });
+        jPanel5.add(btnAgregarVacuna1);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(0, 279, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout cardCitasLayout = new javax.swing.GroupLayout(cardCitas);
+        cardCitas.setLayout(cardCitasLayout);
+        cardCitasLayout.setHorizontalGroup(
+            cardCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardCitasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        cardCitasLayout.setVerticalGroup(
+            cardCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardCitasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cardCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlCards.add(cardCitas, "cardCitas");
+
+        cardVacunas.setBackground(new java.awt.Color(240, 248, 255));
+
+        tblVacunas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblVacunas);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel19.setText("Nueva Vacuna");
+
+        jLabel13.setText("Nombre:");
+        jLabel13.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel3.add(jLabel13);
+
+        inpNombreVacuna.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel3.add(inpNombreVacuna);
+
+        jLabel20.setText("Farmaceutica");
+        jLabel20.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel3.add(jLabel20);
+
+        inpFarmaceutica.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel3.add(inpFarmaceutica);
+
+        jLabel21.setText("Número Dosis");
+        jLabel21.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel3.add(jLabel21);
+
+        inpDosis.setEditor(new javax.swing.JSpinner.NumberEditor(inpDosis, ""));
+        inpDosis.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel3.add(inpDosis);
+
+        btnAgregarVacuna.setText("Agregar Vacuna");
+        btnAgregarVacuna.setPreferredSize(new java.awt.Dimension(220, 40));
+        btnAgregarVacuna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAgregarVacunaMousePressed(evt);
+            }
+        });
+        jPanel3.add(btnAgregarVacuna);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(0, 275, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout cardVacunasLayout = new javax.swing.GroupLayout(cardVacunas);
+        cardVacunas.setLayout(cardVacunasLayout);
+        cardVacunasLayout.setHorizontalGroup(
+            cardVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardVacunasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        cardVacunasLayout.setVerticalGroup(
+            cardVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardVacunasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cardVacunasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlCards.add(cardVacunas, "cardVacunas");
+
+        tblGruposDeRiesgo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tblGruposDeRiesgo);
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel30.setText("Nuevo Grupo De Riesgo");
+
+        jLabel31.setText("Nombre:");
+        jLabel31.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel9.add(jLabel31);
+
+        inpGrpRiesgoNombre.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel9.add(inpGrpRiesgoNombre);
+
+        jLabel32.setText("Descripción:");
+        jLabel32.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel9.add(jLabel32);
+
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane5.setPreferredSize(new java.awt.Dimension(220, 88));
+
+        inpGrpRiesgoDescripcion.setColumns(20);
+        inpGrpRiesgoDescripcion.setRows(5);
+        inpGrpRiesgoDescripcion.setPreferredSize(new java.awt.Dimension(220, 80));
+        inpGrpRiesgoDescripcion.setSize(new java.awt.Dimension(220, 80));
+        jScrollPane5.setViewportView(inpGrpRiesgoDescripcion);
+
+        jPanel9.add(jScrollPane5);
+
+        jLabel33.setText("Edad Minima:");
+        jLabel33.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel9.add(jLabel33);
+
+        inpGrpRiesgoEdadMin.setEditor(new javax.swing.JSpinner.NumberEditor(inpGrpRiesgoEdadMin, ""));
+        inpGrpRiesgoEdadMin.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel9.add(inpGrpRiesgoEdadMin);
+
+        jLabel34.setText("Edad Máxima:");
+        jLabel34.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel9.add(jLabel34);
+
+        inpGrpRiesgoEdadMax.setEditor(new javax.swing.JSpinner.NumberEditor(inpGrpRiesgoEdadMax, ""));
+        inpGrpRiesgoEdadMax.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel9.add(inpGrpRiesgoEdadMax);
+
+        jLabel35.setText("Estado:");
+        jLabel35.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel9.add(jLabel35);
+
+        inpGrpRiesgoEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "En Progreso", "Completado" }));
+        inpGrpRiesgoEstado.setPreferredSize(new java.awt.Dimension(220, 40));
+        inpGrpRiesgoEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpGrpRiesgoEstadoActionPerformed(evt);
+            }
+        });
+        jPanel9.add(inpGrpRiesgoEstado);
+
+        btnAgregarGrupoDeRiesgo.setText("Agregar Grupo de Riesgo");
+        btnAgregarGrupoDeRiesgo.setPreferredSize(new java.awt.Dimension(220, 40));
+        btnAgregarGrupoDeRiesgo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAgregarGrupoDeRiesgoMousePressed(evt);
+            }
+        });
+        jPanel9.add(btnAgregarGrupoDeRiesgo);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addGap(0, 198, Short.MAX_VALUE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout cardGruposDeRiesgoLayout = new javax.swing.GroupLayout(cardGruposDeRiesgo);
+        cardGruposDeRiesgo.setLayout(cardGruposDeRiesgoLayout);
+        cardGruposDeRiesgoLayout.setHorizontalGroup(
+            cardGruposDeRiesgoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardGruposDeRiesgoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        cardGruposDeRiesgoLayout.setVerticalGroup(
+            cardGruposDeRiesgoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cardGruposDeRiesgoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(cardGruposDeRiesgoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addContainerGap(366, Short.MAX_VALUE))
+        );
+
+        pnlCards.add(cardGruposDeRiesgo, "cardGruposDeRiesgo");
+
+        getContentPane().add(pnlCards, java.awt.BorderLayout.EAST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btn_salirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_salirMousePressed
+        System.exit(0);
+    }//GEN-LAST:event_btn_salirMousePressed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
+    private void btn_inicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_inicioMousePressed
+        resetAllMenuItemsColor();
+        setMenuActiveColor(btn_inicio);
+        lblMainTitle.setText("Inicio");
+        switchCardContent("cardInicio");
+    }//GEN-LAST:event_btn_inicioMousePressed
+
+    private void btn_citasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_citasMousePressed
+        resetAllMenuItemsColor();
+        setMenuActiveColor(btn_citas);
+        lblMainTitle.setText("Citas");
+        
+        citasTableModel = new CitasTableModel(colaDeCitas);
+        tblCitas.setModel(citasTableModel);
+        
+        switchCardContent("cardCitas");
+    }//GEN-LAST:event_btn_citasMousePressed
+
+    private void btn_vacunasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_vacunasMousePressed
+        resetAllMenuItemsColor();
+        setMenuActiveColor(btn_vacunas);
+        lblMainTitle.setText("Vacunas");
+        
+        vacunaTableModel = new VacunasTableModel(listaSimpleDeVacunas);
+        tblVacunas.setModel(vacunaTableModel);
+        
+        switchCardContent("cardVacunas");
+    }//GEN-LAST:event_btn_vacunasMousePressed
+
+    private void btn_grupos_de_riesgoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_grupos_de_riesgoMousePressed
+        resetAllMenuItemsColor();
+        setMenuActiveColor(btn_grupos_de_riesgo);
+        lblMainTitle.setText("Grupos de Riesgo");
+        
+        gruposDeRiesgoTableModel = new GruposDeRiesgoTableModel(pilaDeGruposDeRiesgo);
+        tblGruposDeRiesgo.setModel(gruposDeRiesgoTableModel);
+        
+        switchCardContent("cardGruposDeRiesgo");
+    }//GEN-LAST:event_btn_grupos_de_riesgoMousePressed
+
+    private void btn_pacientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_pacientesMousePressed
+        resetAllMenuItemsColor();
+        setMenuActiveColor(btn_pacientes);
+        lblMainTitle.setText("Pacientes");
+        
+        pacientesTableModel = new PacientesTableModel(listaSimpleDePacientes);
+        tblPacientes.setModel(pacientesTableModel);
+        
+        switchCardContent("cardPacientes");
+    }//GEN-LAST:event_btn_pacientesMousePressed
+
+    private void btnAgregarVacunaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarVacunaMousePressed
+        Vacuna nuevaVacuna = new Vacuna(inpFarmaceutica.getText(), inpNombreVacuna.getText(), (Integer) inpDosis.getValue());
+        listaSimpleDeVacunas.push(nuevaVacuna);
+        vacunaTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_btnAgregarVacunaMousePressed
+
+    private void btnAgregarVacuna1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarVacuna1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarVacuna1MousePressed
+
+    private void btnAgregarVacuna2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarVacuna2MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarVacuna2MousePressed
+
+    private void btnAgregarGrupoDeRiesgoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarGrupoDeRiesgoMousePressed
+        GrupoDeRiesgo gr = new GrupoDeRiesgo();
+        gr.setNombre(inpGrpRiesgoNombre.getText());
+        gr.setDescripcion(inpGrpRiesgoDescripcion.getText());
+        gr.setEdadMinima((Integer) inpGrpRiesgoEdadMin.getValue());
+        gr.setEdadMaxima((Integer) inpGrpRiesgoEdadMax.getValue());
+        gr.setEstado((String) inpGrpRiesgoEstado.getSelectedItem());
+        
+        pilaDeGruposDeRiesgo.push(gr);
+        gruposDeRiesgoTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_btnAgregarGrupoDeRiesgoMousePressed
+
+    private void inpGrpRiesgoEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpGrpRiesgoEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpGrpRiesgoEstadoActionPerformed
+
+    private void setMenuActiveColor(JPanel panel) {
+        panel.setBackground(new Color(72,61,139));
+    }
+    
+    private void resetAllMenuItemsColor() {
+        resetActiveMenuColor(btn_inicio);
+        resetActiveMenuColor(btn_pacientes);
+        resetActiveMenuColor(btn_citas);
+        resetActiveMenuColor(btn_vacunas);
+        resetActiveMenuColor(btn_grupos_de_riesgo);
+    }
+    
+    private void resetActiveMenuColor(JPanel panel) {
+        panel.setBackground(new Color(123,104,238));
+    }
+    
+    private void switchCardContent(String cardName) {
+        cardLayout.show(pnlCards, cardName);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel SidePane;
+    private javax.swing.JPanel TitleBar;
+    private javax.swing.JButton btnAgregarGrupoDeRiesgo;
+    private javax.swing.JButton btnAgregarVacuna;
+    private javax.swing.JButton btnAgregarVacuna1;
+    private javax.swing.JButton btnAgregarVacuna2;
+    private javax.swing.JPanel btn_citas;
+    private javax.swing.JPanel btn_grupos_de_riesgo;
+    private javax.swing.JPanel btn_inicio;
+    private javax.swing.JPanel btn_pacientes;
+    private javax.swing.JPanel btn_salir;
+    private javax.swing.JPanel btn_vacunas;
+    private javax.swing.JPanel cardCitas;
+    private javax.swing.JPanel cardGruposDeRiesgo;
+    private javax.swing.JPanel cardInicio;
+    private javax.swing.JPanel cardPacientes;
+    private javax.swing.JPanel cardVacunas;
+    private javax.swing.JPanel grupoMenuCitas;
+    private javax.swing.JPanel grupoMenuConfiguracion;
+    private javax.swing.JPanel grupoMenuPacientes;
+    private javax.swing.JSpinner inpDosis;
+    private javax.swing.JSpinner inpDosis1;
+    private javax.swing.JSpinner inpDosis2;
+    private javax.swing.JTextField inpFarmaceutica;
+    private javax.swing.JTextField inpFarmaceutica1;
+    private javax.swing.JTextField inpFarmaceutica2;
+    private javax.swing.JTextArea inpGrpRiesgoDescripcion;
+    private javax.swing.JSpinner inpGrpRiesgoEdadMax;
+    private javax.swing.JSpinner inpGrpRiesgoEdadMin;
+    private javax.swing.JComboBox<String> inpGrpRiesgoEstado;
+    private javax.swing.JTextField inpGrpRiesgoNombre;
+    private javax.swing.JTextField inpNombreVacuna;
+    private javax.swing.JTextField inpNombreVacuna1;
+    private javax.swing.JTextField inpNombreVacuna2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblMainTitle;
+    private javax.swing.JPanel pnlCards;
+    private javax.swing.JTable tblCitas;
+    private javax.swing.JTable tblGruposDeRiesgo;
+    private javax.swing.JTable tblPacientes;
+    private javax.swing.JTable tblVacunas;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,8 +5,6 @@
  */
 package proyectosistemavacunas;
 
-import ds.ListaSimple;
-import models.Vacuna;
 import ui.Principal;
 
 /**
@@ -14,28 +12,11 @@ import ui.Principal;
  * @author ez
  */
 public class ProyectoSistemaVacunas {
-
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {    
+    public static void main(String[] args) {
         new Principal();
-        // Creando vacunas
-        Vacuna pfizer = new Vacuna("Pfizer");
-        Vacuna astraZeneca = new Vacuna("AstraZeneca");
-        
-        // creando una list simple de vacunas
-        ListaSimple<Vacuna> listaDeVacunas = new ListaSimple();
-        listaDeVacunas.push(pfizer);
-        listaDeVacunas.printList();
-        listaDeVacunas.push(astraZeneca);
-        listaDeVacunas.printList();
-        
-        System.out.println("Remover: " + listaDeVacunas.pop());
-        listaDeVacunas.printList();
-        
-        System.out.println("Esta la lista vacia: " + listaDeVacunas.isEmpty());
-        System.out.println("La cuenta de vacunas es: " + listaDeVacunas.getSize());
     }
-    
 }

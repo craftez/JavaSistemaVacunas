@@ -10,36 +10,51 @@ package models;
  * @author ez
  */
 public class Cita {
-    private Vacuna tipoDeVacuna;
-  private String fechaDeCita;
-  private Paciente paciente;
 
-    public Vacuna getTipoDeVacuna() {
-        return tipoDeVacuna;
+    private String tipoDeVacuna;
+    private String fechaDeCita;
+    private String cedulaPaciente;
+    private String nombrePaciente;
+
+    public Cita() {
     }
 
     public String getFechaDeCita() {
         return fechaDeCita;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setTipoDeVacuna(Vacuna tipoDeVacuna) {
-        this.tipoDeVacuna = tipoDeVacuna;
-    }
-
     public void setFechaDeCita(String fechaDeCita) {
         this.fechaDeCita = fechaDeCita;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public String getTipoDeVacuna() {
+        return tipoDeVacuna;
+    }
+
+    public void setTipoDeVacuna(String tipoDeVacuna) {
+        this.tipoDeVacuna = tipoDeVacuna;
+    }
+
+    public String getCedulaPaciente() {
+        return cedulaPaciente;
+    }
+
+    public void setCedulaPaciente(String cedulaPaciente) {
+        this.cedulaPaciente = cedulaPaciente;
+    }
+
+    public String getNombrePaciente() {
+        return nombrePaciente;
+    }
+
+    public void setNombrePaciente(String nombrePaciente) {
+        this.nombrePaciente = nombrePaciente;
     }
 
     @Override
     public String toString() {
-        return "Paciente{" + "tipoDeVacuna=" + tipoDeVacuna + ", fechaDeCita=" + fechaDeCita + ", paciente=" + paciente + '}';
+        return "Cita{" + "tipoDeVacuna=" + tipoDeVacuna + ", fechaDeCita=" + fechaDeCita + ", cedulaPaciente=" + cedulaPaciente + ", nombrePaciente=" + nombrePaciente + '}';
     }
+
+    
 }

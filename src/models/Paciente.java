@@ -10,11 +10,18 @@ package models;
  * @author ez
  */
 public class Paciente {
-  private String cedula;
-  private String nombreCompleto;
-  private GrupoDeRiesgo grupoDeRiesgo;
-  private LibroDeVacunas vacunas;
-  private String telefono;
+
+    private String cedula;
+    private String nombreCompleto;
+    private String telefono;
+    private String grupoDeRiesgo;
+    private String fechaPrimeraDosis;
+    private String fechaSegundaDosis;
+    private String tipoVacuna;
+    private Boolean esquemaCompleto;
+
+    public Paciente() {
+    }
 
     public String getCedula() {
         return cedula;
@@ -22,14 +29,6 @@ public class Paciente {
 
     public String getNombreCompleto() {
         return nombreCompleto;
-    }
-
-    public GrupoDeRiesgo getGrupoDeRiesgo() {
-        return grupoDeRiesgo;
-    }
-
-    public LibroDeVacunas getVacunas() {
-        return vacunas;
     }
 
     public String getTelefono() {
@@ -44,22 +43,53 @@ public class Paciente {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public void setGrupoDeRiesgo(GrupoDeRiesgo grupoDeRiesgo) {
-        this.grupoDeRiesgo = grupoDeRiesgo;
-    }
-
-    public void setVacunas(LibroDeVacunas vacunas) {
-        this.vacunas = vacunas;
-    }
-
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
+    public String getGrupoDeRiesgo() {
+        return grupoDeRiesgo;
+    }
+
+    public void setGrupoDeRiesgo(String grupoDeRiesgo) {
+        this.grupoDeRiesgo = grupoDeRiesgo;
+    }
+
+    public String getFechaPrimeraDosis() {
+        return fechaPrimeraDosis;
+    }
+
+    public void setFechaPrimeraDosis(String fechaPrimeraDosis) {
+        this.fechaPrimeraDosis = fechaPrimeraDosis;
+    }
+
+    public String getFechaSegundaDosis() {
+        return fechaSegundaDosis;
+    }
+
+    public void setFechaSegundaDosis(String fechaSegundaDosis) {
+        this.fechaSegundaDosis = fechaSegundaDosis;
+    }
+
+    public String getTipoVacuna() {
+        return tipoVacuna;
+    }
+
+    public void setTipoVacuna(String tipoVacuna) {
+        this.tipoVacuna = tipoVacuna;
+    }
+
+    public Boolean getEsquemaCompleto() {
+        return esquemaCompleto;
+    }
+
+    public void setEsquemaCompleto(Boolean esquemaCompleto) {
+        this.esquemaCompleto = esquemaCompleto;
+    }
+
     @Override
     public String toString() {
-        return "Paciente{" + "cedula=" + cedula + ", nombreCompleto=" + nombreCompleto + ", grupoDeRiesgo=" + grupoDeRiesgo + ", vacunas=" + vacunas + ", telefono=" + telefono + '}';
+        return "Paciente{" + "cedula=" + cedula + ", nombreCompleto=" + nombreCompleto + ", telefono=" + telefono + ", grupoDeRiesgo=" + grupoDeRiesgo + ", fechaPrimeraDosis=" + fechaPrimeraDosis + ", fechaSegundaDosis=" + fechaSegundaDosis + ", tipoVacuna=" + tipoVacuna + ", esquemaCompleto=" + esquemaCompleto + '}';
     }
-  
-  
+
 }

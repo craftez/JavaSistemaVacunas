@@ -16,6 +16,9 @@ public class GrupoDeRiesgo {
     private int edadMaxima;
     private String estado;
 
+    public GrupoDeRiesgo() {
+    }
+
     public String getNombre() {
         return nombre;
     }

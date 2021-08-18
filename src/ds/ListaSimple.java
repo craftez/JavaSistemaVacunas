@@ -36,6 +36,33 @@ public class ListaSimple<T> {
         size++;
     }
     
+    /**
+     * Obtiene el valor de un nodo para la posición determinada
+     * @param position para obtener el nodo
+     */
+    public T getValueAt(int position) {
+        
+        // Verifica si la posición ingresada se encuentre en el rango
+        if (position >= 0 && position <= size) {
+            if (position == 0) {
+                return (T) head.getData();
+            } else {
+                // El nodo se debe insertar en algún lugar en medio de la lista
+                Node aux = head;
+
+                // Recorrer la lista hasta llegar a la posicion 
+                // en la cual se insertara el nuevo nodo.
+                for (int i = 0; i < ( position - 1); i++) {
+                    aux = aux.getNext();
+                }
+                
+                return (T) aux.getData();
+            }
+        }
+        
+        return null;
+    }
+    
     public Node pop() {
         if (isEmpty()) return null;
         Node removedNode = head;

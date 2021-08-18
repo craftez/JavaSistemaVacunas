@@ -17,6 +17,12 @@ public class Vacuna {
     private int maxDiasEntreDosis;
     private String estado;
 
+    public Vacuna(String farmaceutica, String nombre, int dosisRequeridas) {
+        this.farmaceutica = farmaceutica;
+        this.nombre = nombre;
+        this.dosisRequeridas = dosisRequeridas;
+    }
+
     public String getFarmaceutica() {
         return farmaceutica;
     }
