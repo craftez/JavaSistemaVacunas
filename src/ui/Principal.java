@@ -1042,7 +1042,7 @@ public class Principal extends javax.swing.JFrame {
         
         inpFarmaceutica.setText(null);
         inpNombreVacuna.setText(null);
-        inpDosis.setValue(null);
+        inpDosis.setValue(0);
     }//GEN-LAST:event_btnAgregarVacunaMousePressed
 
     private void btnCitaNuevaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCitaNuevaMousePressed
