@@ -37,24 +37,7 @@ public class GruposDeRiesgoTableModel extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int col) {
-        GrupoDeRiesgo grupoEncontrado = null;
-
-        if (row == 0) {
-            grupoEncontrado = grupos.peek();
-        } else {
-            GrupoDeRiesgo aux;
-            Pila<GrupoDeRiesgo> tempGrupos = new Pila();
-
-            for (int cursor = 0; cursor < grupos.size(); cursor++) {
-                aux = grupos.pop();
-                if (cursor == row) {
-                    grupoEncontrado = aux;
-                }
-
-                tempGrupos.push(aux);
-            }
-            grupos = tempGrupos;
-        }
+        GrupoDeRiesgo grupoEncontrado = grupos.getValueAt(row + 1);
 
         if (grupoEncontrado != null) {
             if (col == 0) {

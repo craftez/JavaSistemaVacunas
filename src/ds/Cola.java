@@ -34,6 +34,32 @@ public class Cola<T> {
         return dato;
     }
     
+    public T getValueAt(int position) {
+        T dato = null;
+        
+         // Verifica si la posición ingresada se encuentre en el rango
+        if (position >= 0 && position <= size) {
+            if (position == 0) {
+                return (T) first.getData();
+            } else if (position == size) {
+                return (T) last.getData();
+            } else {
+                // El nodo se debe insertar en algún lugar en medio de la lista
+                Node aux = first;
+
+                // Recorrer la lista hasta llegar a la posicion 
+                // en la cual se insertara el nuevo nodo.
+                for (int i = 0; i < ( position - 1); i++) {
+                    aux = aux.getNext();
+                }
+                
+                return (T) aux.getData();
+            }
+        }
+        
+        return dato;
+    }
+    
     public boolean isEmpty() {
         return size == 0;
     }

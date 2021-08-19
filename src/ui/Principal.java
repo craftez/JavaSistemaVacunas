@@ -7,9 +7,12 @@ package ui;
 
 import ds.Cola;
 import ds.ListaSimple;
+import ds.Node;
 import ds.Pila;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.util.Date;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import models.Cita;
@@ -53,6 +56,29 @@ public class Principal extends javax.swing.JFrame {
         initDataStructures();
         
         ((JSpinner.DefaultEditor) inpDosis.getEditor()).getTextField().setEditable(false);
+        calculateMetricts();
+    }
+    
+    private void calculateMetricts() {
+        int pacientesNoVacunados = 0;
+        int pacientesVacunados = 0;
+        int pacientesEsquemaCompleto = 0;
+        
+        Node<Paciente> paciente = listaSimpleDePacientes.getHead();
+        while(paciente != null) {
+            if (paciente.getData().getEsquemaCompleto()) {
+                pacientesEsquemaCompleto++;
+            } else if (paciente.getData().getFechaPrimeraDosis() != null) {
+                pacientesVacunados++;
+            } else {
+                pacientesNoVacunados++;
+            }
+            paciente = paciente.getNext();
+        }
+        
+        lblPacientesEsquemaCompleto.setText(pacientesEsquemaCompleto + "");
+        lblPacientesVacunados.setText(pacientesVacunados + "");
+        lblPacientesNoVacunados.setText(pacientesNoVacunados + "");
     }
     
     private void initDataStructures() {
@@ -94,10 +120,19 @@ public class Principal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         TitleBar = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         lblMainTitle = new javax.swing.JLabel();
         pnlCards = new javax.swing.JPanel();
         cardInicio = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        lblPacientesNoVacunados = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        lblPacientesVacunados = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        lblPacientesEsquemaCompleto = new javax.swing.JLabel();
         cardPacientes = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPacientes = new javax.swing.JTable();
@@ -105,12 +140,21 @@ public class Principal extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
-        inpNombreVacuna2 = new javax.swing.JTextField();
+        inpPacienteCedula = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        inpFarmaceutica2 = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
-        inpDosis2 = new javax.swing.JSpinner();
-        btnAgregarVacuna2 = new javax.swing.JButton();
+        inpPacienteNombre = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        inpPacienteTelefono = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        cmbPacienteGrupoDeRiesgo = new javax.swing.JComboBox<>();
+        jLabel39 = new javax.swing.JLabel();
+        inpPacientePrimeraDosis = new com.toedter.calendar.JDateChooser();
+        jLabel41 = new javax.swing.JLabel();
+        inpPacienteSegundaDosis = new com.toedter.calendar.JDateChooser();
+        jLabel40 = new javax.swing.JLabel();
+        cmbPacienteVacuna = new javax.swing.JComboBox<>();
+        chkPacienteEsquemaCompleto = new javax.swing.JCheckBox();
+        btnAgregarNuevoPaciente = new javax.swing.JButton();
         cardCitas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCitas = new javax.swing.JTable();
@@ -118,12 +162,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        inpNombreVacuna1 = new javax.swing.JTextField();
+        inpCitaCedula = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        inpFarmaceutica1 = new javax.swing.JTextField();
+        inpCitaNombre = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        cmbCitaTipoVacuna = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        inpDosis1 = new javax.swing.JSpinner();
-        btnAgregarVacuna1 = new javax.swing.JButton();
+        inpCitaFecha = new com.toedter.calendar.JDateChooser();
+        btnCitaNueva = new javax.swing.JButton();
         cardVacunas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVacunas = new javax.swing.JTable();
@@ -158,11 +204,11 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
-        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setMinimumSize(new java.awt.Dimension(1280, 920));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 920));
         setResizable(false);
-        setSize(new java.awt.Dimension(1280, 720));
+        setSize(new java.awt.Dimension(1280, 920));
 
         SidePane.setBackground(new java.awt.Color(106, 90, 205));
         SidePane.setPreferredSize(new java.awt.Dimension(300, 0));
@@ -316,12 +362,33 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(SidePane, java.awt.BorderLayout.WEST);
 
-        TitleBar.setBackground(new java.awt.Color(72, 61, 139));
+        TitleBar.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(316, 100));
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/covid-logo.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        lblMainTitle.setBackground(new java.awt.Color(72, 61, 139));
         lblMainTitle.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
-        lblMainTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblMainTitle.setForeground(new java.awt.Color(72, 61, 139));
         lblMainTitle.setText("Inicio");
         lblMainTitle.setPreferredSize(new java.awt.Dimension(230, 40));
 
@@ -354,24 +421,109 @@ public class Principal extends javax.swing.JFrame {
         pnlCards.setPreferredSize(new java.awt.Dimension(980, 914));
         pnlCards.setLayout(new java.awt.CardLayout());
 
-        jLabel18.setText("Inicio");
+        cardInicio.setBackground(new java.awt.Color(240, 248, 255));
 
-        javax.swing.GroupLayout cardInicioLayout = new javax.swing.GroupLayout(cardInicio);
-        cardInicio.setLayout(cardInicioLayout);
-        cardInicioLayout.setHorizontalGroup(
-            cardInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cardInicioLayout.createSequentialGroup()
-                .addGap(252, 252, 252)
-                .addComponent(jLabel18)
-                .addContainerGap(693, Short.MAX_VALUE))
+        jPanel10.setBackground(new java.awt.Color(29, 61, 89));
+        jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        jPanel10.setPreferredSize(new java.awt.Dimension(240, 100));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Pacientes No Vacunados");
+
+        lblPacientesNoVacunados.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        lblPacientesNoVacunados.setForeground(new java.awt.Color(255, 255, 255));
+        lblPacientesNoVacunados.setText("0");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPacientesNoVacunados)
+                    .addComponent(jLabel6))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
-        cardInicioLayout.setVerticalGroup(
-            cardInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cardInicioLayout.createSequentialGroup()
-                .addGap(373, 373, 373)
-                .addComponent(jLabel18)
-                .addContainerGap(525, Short.MAX_VALUE))
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPacientesNoVacunados, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        cardInicio.add(jPanel10);
+
+        jPanel11.setBackground(new java.awt.Color(29, 61, 89));
+        jPanel11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        jPanel11.setPreferredSize(new java.awt.Dimension(240, 100));
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Pacientes Vacunados");
+
+        lblPacientesVacunados.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        lblPacientesVacunados.setForeground(new java.awt.Color(255, 255, 255));
+        lblPacientesVacunados.setText("0");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPacientesVacunados)
+                    .addComponent(jLabel12))
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPacientesVacunados, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        cardInicio.add(jPanel11);
+
+        jPanel12.setBackground(new java.awt.Color(29, 61, 89));
+        jPanel12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        jPanel12.setPreferredSize(new java.awt.Dimension(240, 100));
+
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Pacientes Esquema Completo");
+
+        lblPacientesEsquemaCompleto.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        lblPacientesEsquemaCompleto.setForeground(new java.awt.Color(255, 255, 255));
+        lblPacientesEsquemaCompleto.setText("0");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPacientesEsquemaCompleto)
+                    .addComponent(jLabel15))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPacientesEsquemaCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        cardInicio.add(jPanel12);
 
         pnlCards.add(cardInicio, "cardInicio");
 
@@ -390,38 +542,76 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel26.setText("Nueva Cita");
+        jLabel26.setText("Nuevo Paciente");
 
-        jLabel27.setText("Nombre:");
+        jLabel27.setText("Cédula:");
         jLabel27.setPreferredSize(new java.awt.Dimension(220, 25));
         jPanel7.add(jLabel27);
 
-        inpNombreVacuna2.setPreferredSize(new java.awt.Dimension(220, 40));
-        jPanel7.add(inpNombreVacuna2);
+        inpPacienteCedula.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpPacienteCedula);
 
-        jLabel28.setText("Farmaceutica");
+        jLabel28.setText("Nombre:");
         jLabel28.setPreferredSize(new java.awt.Dimension(220, 25));
         jPanel7.add(jLabel28);
 
-        inpFarmaceutica2.setPreferredSize(new java.awt.Dimension(220, 40));
-        jPanel7.add(inpFarmaceutica2);
+        inpPacienteNombre.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpPacienteNombre);
 
-        jLabel29.setText("Número Dosis");
-        jLabel29.setPreferredSize(new java.awt.Dimension(220, 25));
-        jPanel7.add(jLabel29);
+        jLabel37.setText("Teléfono:");
+        jLabel37.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel37);
 
-        inpDosis2.setEditor(new javax.swing.JSpinner.NumberEditor(inpDosis2, ""));
-        inpDosis2.setPreferredSize(new java.awt.Dimension(220, 40));
-        jPanel7.add(inpDosis2);
+        inpPacienteTelefono.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpPacienteTelefono);
 
-        btnAgregarVacuna2.setText("Agregar Vacuna");
-        btnAgregarVacuna2.setPreferredSize(new java.awt.Dimension(220, 40));
-        btnAgregarVacuna2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnAgregarVacuna2MousePressed(evt);
+        jLabel38.setText("Grupo De Riesgo");
+        jLabel38.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel38);
+
+        cmbPacienteGrupoDeRiesgo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grupo De Riesgo 1", "Grupo De Riesgo 2", "Grupo De Riesgo 3", "Grupo De Riesgo 4", "Grupo De Riesgo 5" }));
+        cmbPacienteGrupoDeRiesgo.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(cmbPacienteGrupoDeRiesgo);
+
+        jLabel39.setText("Fecha Primera Dosis:");
+        jLabel39.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel39);
+
+        inpPacientePrimeraDosis.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpPacientePrimeraDosis);
+
+        jLabel41.setText("Fecha Segunda Dosis:");
+        jLabel41.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel41);
+
+        inpPacienteSegundaDosis.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(inpPacienteSegundaDosis);
+
+        jLabel40.setText("Vacuna:");
+        jLabel40.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel7.add(jLabel40);
+
+        cmbPacienteVacuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pfizer", "Jhonson&Jhonson", "Moderna" }));
+        cmbPacienteVacuna.setPreferredSize(new java.awt.Dimension(220, 40));
+        cmbPacienteVacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPacienteVacunaActionPerformed(evt);
             }
         });
-        jPanel7.add(btnAgregarVacuna2);
+        jPanel7.add(cmbPacienteVacuna);
+
+        chkPacienteEsquemaCompleto.setText("Esquema Completo");
+        chkPacienteEsquemaCompleto.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel7.add(chkPacienteEsquemaCompleto);
+
+        btnAgregarNuevoPaciente.setText("Nuevo Paciente");
+        btnAgregarNuevoPaciente.setPreferredSize(new java.awt.Dimension(220, 40));
+        btnAgregarNuevoPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAgregarNuevoPacienteMousePressed(evt);
+            }
+        });
+        jPanel7.add(btnAgregarNuevoPaciente);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -432,7 +622,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel26)
-                        .addGap(0, 279, Short.MAX_VALUE))
+                        .addGap(0, 251, Short.MAX_VALUE))
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -442,8 +632,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout cardPacientesLayout = new javax.swing.GroupLayout(cardPacientes);
@@ -463,7 +653,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(cardPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -486,36 +676,43 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel22.setText("Nueva Cita");
 
-        jLabel23.setText("Nombre:");
+        jLabel23.setText("Cédula:");
         jLabel23.setPreferredSize(new java.awt.Dimension(220, 25));
         jPanel5.add(jLabel23);
 
-        inpNombreVacuna1.setPreferredSize(new java.awt.Dimension(220, 40));
-        jPanel5.add(inpNombreVacuna1);
+        inpCitaCedula.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel5.add(inpCitaCedula);
 
-        jLabel24.setText("Farmaceutica");
+        jLabel24.setText("Nombre:");
         jLabel24.setPreferredSize(new java.awt.Dimension(220, 25));
         jPanel5.add(jLabel24);
 
-        inpFarmaceutica1.setPreferredSize(new java.awt.Dimension(220, 40));
-        jPanel5.add(inpFarmaceutica1);
+        inpCitaNombre.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel5.add(inpCitaNombre);
 
-        jLabel25.setText("Número Dosis");
+        jLabel36.setText("Vacuna:");
+        jLabel36.setPreferredSize(new java.awt.Dimension(220, 25));
+        jPanel5.add(jLabel36);
+
+        cmbCitaTipoVacuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pfizer", "Jhonson&Jhonson", "Moderna" }));
+        cmbCitaTipoVacuna.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel5.add(cmbCitaTipoVacuna);
+
+        jLabel25.setText("Fecha de Cita:");
         jLabel25.setPreferredSize(new java.awt.Dimension(220, 25));
         jPanel5.add(jLabel25);
 
-        inpDosis1.setEditor(new javax.swing.JSpinner.NumberEditor(inpDosis1, ""));
-        inpDosis1.setPreferredSize(new java.awt.Dimension(220, 40));
-        jPanel5.add(inpDosis1);
+        inpCitaFecha.setPreferredSize(new java.awt.Dimension(220, 40));
+        jPanel5.add(inpCitaFecha);
 
-        btnAgregarVacuna1.setText("Agregar Vacuna");
-        btnAgregarVacuna1.setPreferredSize(new java.awt.Dimension(220, 40));
-        btnAgregarVacuna1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCitaNueva.setText("Nueva Cita");
+        btnCitaNueva.setPreferredSize(new java.awt.Dimension(220, 40));
+        btnCitaNueva.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnAgregarVacuna1MousePressed(evt);
+                btnCitaNuevaMousePressed(evt);
             }
         });
-        jPanel5.add(btnAgregarVacuna1);
+        jPanel5.add(btnCitaNueva);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -536,8 +733,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout cardCitasLayout = new javax.swing.GroupLayout(cardCitas);
@@ -555,9 +752,9 @@ public class Principal extends javax.swing.JFrame {
             cardCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardCitasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cardCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(cardCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -720,11 +917,6 @@ public class Principal extends javax.swing.JFrame {
 
         inpGrpRiesgoEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "En Progreso", "Completado" }));
         inpGrpRiesgoEstado.setPreferredSize(new java.awt.Dimension(220, 40));
-        inpGrpRiesgoEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpGrpRiesgoEstadoActionPerformed(evt);
-            }
-        });
         jPanel9.add(inpGrpRiesgoEstado);
 
         btnAgregarGrupoDeRiesgo.setText("Agregar Grupo de Riesgo");
@@ -796,6 +988,7 @@ public class Principal extends javax.swing.JFrame {
         setMenuActiveColor(btn_inicio);
         lblMainTitle.setText("Inicio");
         switchCardContent("cardInicio");
+        calculateMetricts();
     }//GEN-LAST:event_btn_inicioMousePressed
 
     private void btn_citasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_citasMousePressed
@@ -846,15 +1039,67 @@ public class Principal extends javax.swing.JFrame {
         Vacuna nuevaVacuna = new Vacuna(inpFarmaceutica.getText(), inpNombreVacuna.getText(), (Integer) inpDosis.getValue());
         listaSimpleDeVacunas.push(nuevaVacuna);
         vacunaTableModel.fireTableDataChanged();
+        
+        inpFarmaceutica.setText(null);
+        inpNombreVacuna.setText(null);
+        inpDosis.setValue(null);
     }//GEN-LAST:event_btnAgregarVacunaMousePressed
 
-    private void btnAgregarVacuna1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarVacuna1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarVacuna1MousePressed
+    private void btnCitaNuevaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCitaNuevaMousePressed
+        Cita cita = new Cita();
+        cita.setCedulaPaciente(inpCitaCedula.getText());
+        cita.setNombrePaciente(inpCitaNombre.getText());
+        cita.setTipoDeVacuna((String) cmbCitaTipoVacuna.getSelectedItem());
+        Date fecha = inpCitaFecha.getDate();
+        cita.setFechaDeCita(DateFormat.getDateInstance().format(fecha));
+        
+        System.out.println(cita);
+        
+        colaDeCitas.enqueue(cita);
+        System.out.println(colaDeCitas);
+        citasTableModel.fireTableDataChanged();
+        
+        inpCitaCedula.setText(null);
+        inpCitaNombre.setText(null);
+        cmbCitaTipoVacuna.setSelectedItem(null);
+        inpCitaFecha.setDate(null);
+    }//GEN-LAST:event_btnCitaNuevaMousePressed
 
-    private void btnAgregarVacuna2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarVacuna2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarVacuna2MousePressed
+    private void btnAgregarNuevoPacienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarNuevoPacienteMousePressed
+        Paciente nuevoPaciente = new Paciente();
+        
+        nuevoPaciente.setCedula(inpPacienteCedula.getText());
+        nuevoPaciente.setNombreCompleto(inpPacienteNombre.getText());
+        nuevoPaciente.setTelefono(inpPacienteTelefono.getText());
+        nuevoPaciente.setGrupoDeRiesgo((String) cmbPacienteGrupoDeRiesgo.getSelectedItem());
+        
+        Date primeraDosis = inpPacientePrimeraDosis.getDate();
+        Date segundaDosis = inpPacienteSegundaDosis.getDate();
+        
+        if (primeraDosis != null) {
+           nuevoPaciente.setFechaPrimeraDosis(DateFormat.getDateInstance().format(primeraDosis));
+        }
+        if (segundaDosis != null) {
+            nuevoPaciente.setFechaSegundaDosis(DateFormat.getDateInstance().format(segundaDosis));
+        }
+        
+        nuevoPaciente.setTipoVacuna((String) cmbPacienteVacuna.getSelectedItem());
+        nuevoPaciente.setEsquemaCompleto(chkPacienteEsquemaCompleto.isSelected());
+        
+        listaSimpleDePacientes.push(nuevoPaciente);
+        pacientesTableModel.fireTableDataChanged();
+        
+        inpPacienteCedula.setText(null);
+        inpPacienteNombre.setText(null);
+        inpPacienteTelefono.setText(null);
+        cmbPacienteGrupoDeRiesgo.setSelectedItem(null);
+        
+        inpPacientePrimeraDosis.setDate(null);
+        inpPacienteSegundaDosis.setDate(null);
+        
+        cmbPacienteVacuna.setSelectedItem(null);
+        chkPacienteEsquemaCompleto.setSelected(false);
+    }//GEN-LAST:event_btnAgregarNuevoPacienteMousePressed
 
     private void btnAgregarGrupoDeRiesgoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarGrupoDeRiesgoMousePressed
         GrupoDeRiesgo gr = new GrupoDeRiesgo();
@@ -866,11 +1111,17 @@ public class Principal extends javax.swing.JFrame {
         
         pilaDeGruposDeRiesgo.push(gr);
         gruposDeRiesgoTableModel.fireTableDataChanged();
+        
+        inpGrpRiesgoNombre.setText(null);
+        inpGrpRiesgoDescripcion.setText(null);
+        inpGrpRiesgoEdadMin.setValue(0);
+        inpGrpRiesgoEdadMax.setValue(0);
+        inpGrpRiesgoEstado.setSelectedItem(null);
     }//GEN-LAST:event_btnAgregarGrupoDeRiesgoMousePressed
 
-    private void inpGrpRiesgoEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpGrpRiesgoEstadoActionPerformed
+    private void cmbPacienteVacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPacienteVacunaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inpGrpRiesgoEstadoActionPerformed
+    }//GEN-LAST:event_cmbPacienteVacunaActionPerformed
 
     private void setMenuActiveColor(JPanel panel) {
         panel.setBackground(new Color(72,61,139));
@@ -896,9 +1147,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel SidePane;
     private javax.swing.JPanel TitleBar;
     private javax.swing.JButton btnAgregarGrupoDeRiesgo;
+    private javax.swing.JButton btnAgregarNuevoPaciente;
     private javax.swing.JButton btnAgregarVacuna;
-    private javax.swing.JButton btnAgregarVacuna1;
-    private javax.swing.JButton btnAgregarVacuna2;
+    private javax.swing.JButton btnCitaNueva;
     private javax.swing.JPanel btn_citas;
     private javax.swing.JPanel btn_grupos_de_riesgo;
     private javax.swing.JPanel btn_inicio;
@@ -910,28 +1161,35 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel cardInicio;
     private javax.swing.JPanel cardPacientes;
     private javax.swing.JPanel cardVacunas;
+    private javax.swing.JCheckBox chkPacienteEsquemaCompleto;
+    private javax.swing.JComboBox<String> cmbCitaTipoVacuna;
+    private javax.swing.JComboBox<String> cmbPacienteGrupoDeRiesgo;
+    private javax.swing.JComboBox<String> cmbPacienteVacuna;
     private javax.swing.JPanel grupoMenuCitas;
     private javax.swing.JPanel grupoMenuConfiguracion;
     private javax.swing.JPanel grupoMenuPacientes;
+    private javax.swing.JTextField inpCitaCedula;
+    private com.toedter.calendar.JDateChooser inpCitaFecha;
+    private javax.swing.JTextField inpCitaNombre;
     private javax.swing.JSpinner inpDosis;
-    private javax.swing.JSpinner inpDosis1;
-    private javax.swing.JSpinner inpDosis2;
     private javax.swing.JTextField inpFarmaceutica;
-    private javax.swing.JTextField inpFarmaceutica1;
-    private javax.swing.JTextField inpFarmaceutica2;
     private javax.swing.JTextArea inpGrpRiesgoDescripcion;
     private javax.swing.JSpinner inpGrpRiesgoEdadMax;
     private javax.swing.JSpinner inpGrpRiesgoEdadMin;
     private javax.swing.JComboBox<String> inpGrpRiesgoEstado;
     private javax.swing.JTextField inpGrpRiesgoNombre;
     private javax.swing.JTextField inpNombreVacuna;
-    private javax.swing.JTextField inpNombreVacuna1;
-    private javax.swing.JTextField inpNombreVacuna2;
+    private javax.swing.JTextField inpPacienteCedula;
+    private javax.swing.JTextField inpPacienteNombre;
+    private com.toedter.calendar.JDateChooser inpPacientePrimeraDosis;
+    private com.toedter.calendar.JDateChooser inpPacienteSegundaDosis;
+    private javax.swing.JTextField inpPacienteTelefono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -943,7 +1201,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -951,11 +1208,22 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -971,6 +1239,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblMainTitle;
+    private javax.swing.JLabel lblPacientesEsquemaCompleto;
+    private javax.swing.JLabel lblPacientesNoVacunados;
+    private javax.swing.JLabel lblPacientesVacunados;
     private javax.swing.JPanel pnlCards;
     private javax.swing.JTable tblCitas;
     private javax.swing.JTable tblGruposDeRiesgo;

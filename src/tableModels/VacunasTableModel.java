@@ -32,7 +32,7 @@ public class VacunasTableModel extends AbstractTableModel {
     
     public Object getValueAt(int row, int col) {
         Object temp = null;
-        Vacuna vacuna = vacunas.getValueAt(row);
+        Vacuna vacuna = vacunas.getValueAt(row + 1);
         
         if (col == 0) {
             return vacuna.getNombre();

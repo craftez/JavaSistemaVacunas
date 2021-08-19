@@ -37,39 +37,25 @@ public class CitasTableModel extends AbstractTableModel {
     }
     
     public Object getValueAt(int row, int col) {
-        Cita citaEncontrada = null;
+        System.out.println("row: " + row);
+        Cita citaEncontrada = citas.getValueAt(row + 1);
         
-        if (row == 0) {
-            citaEncontrada = citas.getFirst();
-        } else {
-            Cita aux;
-            Cola<Cita> tempCitas = new Cola();
-            
-            for(int cursor = 0; cursor < citas.getSize(); cursor++) {
-                aux = citas.dequeue();
-                if (cursor == row) {
-                    citaEncontrada = aux;
-                }
-                
-                tempCitas.enqueue(aux);
+        if (citaEncontrada != null) { 
+            if (col == 0) {
+                return citaEncontrada.getTipoDeVacuna();
             }
-            citas = tempCitas;
-        }
-        
-        if (col == 0) {
-            return citaEncontrada.getTipoDeVacuna();
-        }
-        
-        if (col == 1) {
-            return citaEncontrada.getFechaDeCita();
-        }
-        
-        if (col == 2) {
-            return citaEncontrada.getCedulaPaciente();
-        }
-        
-        if (col == 3) {
-            return citaEncontrada.getNombrePaciente();
+
+            if (col == 1) {
+                return citaEncontrada.getFechaDeCita();
+            }
+
+            if (col == 2) {
+                return citaEncontrada.getCedulaPaciente();
+            }
+
+            if (col == 3) {
+                return citaEncontrada.getNombrePaciente();
+            }
         }
         
         return citaEncontrada;
@@ -80,9 +66,6 @@ public class CitasTableModel extends AbstractTableModel {
     }
     
     public Class getColumnClass(int col) {
-        if (col == 2) {
-            return Integer.class;
-        }
         return String.class;
     }
 }
